@@ -5,19 +5,21 @@ import InstagramReels from '@/components/InstagramReels';
 import TwitterPosts from '@/components/TwitterPosts';
 import { ProductDialog } from '@/components/ProductDialog';
 import { OfferPopup } from '@/components/OfferPopup';
-import { dummyCakes } from '@/data/dummy';
+import { Cake, dummyCakes } from '@/data/dummy';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { ArrowRight, Clock, Heart, Shield } from 'lucide-react';
 
 const Index = () => {
   const [selectedCake, setSelectedCake] = useState(null);
   const [isProductDialogOpen, setIsProductDialogOpen] = useState(false);
 
-  const featuredCakes = dummyCakes.filter(cake => cake.isFeatured);
-  const popularCakes = dummyCakes.filter(cake => cake.isBestseller);
+  const featuredCakes = dummyCakes.filter(cake => cake.featured);
+  const popularCakes = dummyCakes.filter(cake => cake.bestseller);
 
-  const handleCakeClick = (cake: any) => {
+  const handleCakeClick = (cake: Cake) => {
     setSelectedCake(cake);
     setIsProductDialogOpen(true);
   };
@@ -27,32 +29,61 @@ const Index = () => {
       <Header />
       <OfferPopup delay={3000} />
       
-      <section className="relative py-24 overflow-hidden">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            <div className="space-y-5">
-              <h1 className="text-5xl font-bold text-primary">
-                Indulge in Sweetness, Crafted with Love
+      <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0">
+          <img
+            src={"/hero-cake.jpg"}
+            alt="Hero Cake"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-background/80 via-background/40 to-transparent" />
+        </div>
+
+        <div className="relative container mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center">
+          <div className="space-y-8">
+            <div className="space-y-4">
+              <Badge className="bg-accent text-accent-foreground">
+                Premium Artisanal Cakes
+              </Badge>
+              <h1 className="text-hero leading-tight">
+                MY FAVORITE
+                <br />
+                <span className="text-primary">CAKE</span>
               </h1>
-              <p className="text-muted-foreground text-lg">
-                Experience the magic of our handcrafted cakes, made with the finest ingredients and
-                passion for perfection.
+              <p className="text-subtitle max-w-lg">
+                Discover our exquisite collection of handcrafted cakes made with the finest ingredients. From classic favorites to custom creations, every bite tells a story.
               </p>
-              <div className="flex space-x-4">
-                <Button size="lg" asChild>
-                  <Link to="/cakes">Order Now</Link>
-                </Button>
-                <Button variant="outline" size="lg" asChild>
-                  <Link to="/custom">Custom Order</Link>
-                </Button>
-              </div>
             </div>
-            <div className="relative">
-              <img
-                src="/hero-cake.png"
-                alt="Delicious Cake"
-                className="w-full rounded-lg shadow-xl"
-              />
+
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button asChild className="btn-hero">
+                <Link to="/cakes">
+                  Explore Cakes
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+              <Button variant="outline" asChild className="btn-elegant">
+                <Link to="/custom">Custom Orders</Link>
+              </Button>
+            </div>
+
+            {/* Features */}
+            <div className="grid grid-cols-3 gap-4 pt-8">
+              <div className="text-center space-y-2">
+                <Clock className="h-6 w-6 mx-auto text-primary" />
+                <p className="text-sm font-medium">Fast Delivery</p>
+                <p className="text-xs text-muted-foreground">1-3 hours</p>
+              </div>
+              <div className="text-center space-y-2">
+                <Shield className="h-6 w-6 mx-auto text-primary" />
+                <p className="text-sm font-medium">Quality Assured</p>
+                <p className="text-xs text-muted-foreground">Premium ingredients</p>
+              </div>
+              <div className="text-center space-y-2">
+                <Heart className="h-6 w-6 mx-auto text-primary" />
+                <p className="text-sm font-medium">Made with Love</p>
+                <p className="text-xs text-muted-foreground">Handcrafted</p>
+              </div>
             </div>
           </div>
         </div>
