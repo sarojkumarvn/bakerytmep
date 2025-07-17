@@ -2,41 +2,67 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Cake Website Design System - Elegant & Sophisticated */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Brand Colors - Inspired by elegant cake design */
+    --background: 35 20% 98%;
+    --foreground: 25 30% 15%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 35 20% 99%;
+    --card-foreground: 25 30% 15%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 35 20% 99%;
+    --popover-foreground: 25 30% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Chocolate Brown Primary */
+    --primary: 25 30% 25%;
+    --primary-foreground: 35 20% 98%;
+    --primary-glow: 25 40% 35%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Cream Secondary */
+    --secondary: 40 25% 92%;
+    --secondary-foreground: 25 30% 25%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Muted tones */
+    --muted: 35 15% 94%;
+    --muted-foreground: 25 20% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Accent - Soft rose gold */
+    --accent: 15 35% 85%;
+    --accent-foreground: 25 30% 25%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* Destructive */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 35 20% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Borders and inputs */
+    --border: 35 15% 88%;
+    --input: 35 15% 92%;
+    --ring: 25 30% 25%;
 
-    --radius: 0.5rem;
+    /* Design tokens */
+    --radius: 0.75rem;
+    
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--background)), hsl(var(--secondary)));
+    --gradient-chocolate: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-cream: linear-gradient(180deg, hsl(var(--card)), hsl(var(--secondary)));
+    
+    /* Shadows */
+    --shadow-elegant: 0 10px 40px -10px hsl(var(--primary) / 0.15);
+    --shadow-soft: 0 4px 20px -2px hsl(var(--primary) / 0.08);
+    --shadow-chocolate: 0 8px 32px -8px hsl(var(--primary) / 0.25);
+    
+    /* Typography */
+    --font-display: 'Playfair Display', serif;
+    --font-body: 'Inter', sans-serif;
+    
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-spring: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +126,50 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-body;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+  }
+}
+
+@layer components {
+  /* Button variants */
+  .btn-hero {
+    @apply bg-gradient-to-r from-primary to-primary-glow text-primary-foreground 
+           px-8 py-4 rounded-xl font-medium shadow-chocolate
+           hover:shadow-xl hover:scale-105 transition-all duration-300;
+  }
+  
+  .btn-elegant {
+    @apply bg-card border border-border text-card-foreground 
+           px-6 py-3 rounded-lg font-medium shadow-soft
+           hover:bg-accent hover:shadow-elegant transition-all duration-300;
+  }
+  
+  /* Card variants */
+  .card-elegant {
+    @apply bg-gradient-to-b from-card to-secondary border border-border rounded-xl
+           shadow-elegant hover:shadow-chocolate transition-all duration-300;
+  }
+  
+  .card-product {
+    @apply bg-card border border-border rounded-xl overflow-hidden
+           shadow-soft hover:shadow-elegant hover:scale-105 transition-all duration-300;
+  }
+  
+  /* Text styles */
+  .text-display {
+    font-family: var(--font-display);
+  }
+  
+  .text-hero {
+    @apply text-display text-5xl md:text-6xl lg:text-7xl font-bold 
+           bg-gradient-to-br from-primary to-primary-glow bg-clip-text text-transparent;
+  }
+  
+  .text-subtitle {
+    @apply text-muted-foreground text-lg md:text-xl font-light leading-relaxed;
   }
 }
