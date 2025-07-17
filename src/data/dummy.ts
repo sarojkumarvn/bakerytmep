@@ -312,3 +312,51 @@ export const analyticsData = {
   mostActiveUsers: dummyUsers.slice(0, 2),
   pendingOrders: dummyOrders.filter(order => order.orderStatus === 'pending').length
 };
+
+export const testimonials = [
+  {
+    id: 1,
+    name: "Sarah Johnson",
+    role: "Wedding Planner",
+    content: "The wedding cake was absolutely stunning and tasted even better than it looked! Our guests couldn't stop raving about it. The attention to detail was remarkable and it matched our wedding theme perfectly. Delivery was on time and the staff was extremely professional.",
+    rating: 5,
+    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&h=200&q=80",
+    cakeImage: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"
+  },
+  {
+    id: 2,
+    name: "Michael Chen",
+    role: "Birthday Celebrant",
+    content: "Best birthday cake I've ever had! The custom design was exactly what I wanted and the flavor was incredible. The red velvet with cream cheese frosting was to die for. They even included a personalized message that made the celebration extra special.",
+    rating: 5,
+    image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&h=200&q=80",
+    cakeImage: "https://images.unsplash.com/photo-1558301211-0d8c8ddee6ec?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"
+  },
+  {
+    id: 3,
+    name: "Emily Rodriguez",
+    role: "Corporate Client",
+    content: "We order cakes for all our office events here. Consistent quality and beautiful presentation every time. The team always accommodates our last-minute requests and the cakes arrive fresh and delicious. The lemon drizzle cake is our team favorite!",
+    rating: 4,
+    image: "https://images.unsplash.com/photo-1554151228-14d9def656e4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&h=200&q=80",
+    cakeImage: "https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"
+  },
+  {
+    id: 4,
+    name: "David Wilson",
+    role: "Anniversary Celebrant",
+    content: "The cake brought tears to my wife's eyes - it was that beautiful. And the taste? Simply divine! The three-tier vanilla cake with fresh berries was exactly what we envisioned for our 25th anniversary. The bakery even included a complimentary anniversary topper.",
+    rating: 5,
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&h=200&q=80",
+    cakeImage: "https://images.unsplash.com/photo-1571115177098-24ec42ed204d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"
+  },
+  {
+    id: 5,
+    name: "Olivia Smith",
+    role: "Event Organizer",
+    content: "Reliable, professional, and absolutely delicious. Our go-to bakery for all major events. Their gluten-free options are just as good as the regular cakes, which is rare to find. The chocolate fudge cake is always a crowd-pleaser at our galas.",
+    rating: 5,
+    image: "https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&h=200&q=80",
+    cakeImage: "https://images.unsplash.com/photo-1562440499-64c9a111f713?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"
+  }
+];

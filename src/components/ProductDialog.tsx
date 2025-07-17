@@ -65,7 +65,7 @@ export const ProductDialog = ({ open, onOpenChange, cake }: ProductDialogProps) 
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-4xl max-h-[90vh] overflow-hidden p-0">
+      <DialogContent className="max-w-4xl max-h-[90vh] overflow-auto p-0">
         <div className="grid md:grid-cols-2 gap-6 p-6">
           {/* Image Section */}
           <div className="space-y-4">

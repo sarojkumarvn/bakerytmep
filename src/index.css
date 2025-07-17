@@ -3,8 +3,22 @@
 @tailwind utilities;
 
 /* Cake Website Design System - Elegant & Sophisticated */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
 
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
 @layer base {
   :root {
     /* Brand Colors - Inspired by elegant cake design */
