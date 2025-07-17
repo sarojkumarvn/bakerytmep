@@ -13,13 +13,28 @@ import {
   Settings,
   Plus,
   Filter,
-  Download
+  Download,
+  Gift,
+  MapPin,
+  Phone,
+  Globe,
+  Instagram,
+  Twitter,
+  Percent,
+  Calendar,
+  Bell,
+  Shield,
+  Database,
+  Activity
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Switch } from '@/components/ui/switch';
 import Header from '@/components/Header';
 import { analyticsData, dummyOrders, dummyCakes, dummyUsers, dummyReviews } from '@/data/dummy';
 
@@ -54,6 +69,29 @@ const AdminDashboard = () => {
       case 'cancelled': return 'bg-red-100 text-red-800';
       default: return 'bg-gray-100 text-gray-800';
     }
+  };
+
+  const dummyCoupons = [
+    { id: 1, code: 'WELCOME10', discount: 10, type: 'percentage', minOrder: 500, expiry: '2024-12-31', active: true, used: 45 },
+    { id: 2, code: 'FLAT50', discount: 50, type: 'flat', minOrder: 1000, expiry: '2024-11-30', active: true, used: 23 },
+    { id: 3, code: 'BIRTHDAY20', discount: 20, type: 'percentage', minOrder: 800, expiry: '2024-12-15', active: false, used: 67 }
+  ];
+
+  const deliverySettings = {
+    hours: '9:00 AM - 9:00 PM',
+    areas: ['Mumbai Central', 'Bandra', 'Andheri', 'Thane'],
+    charges: 50,
+    freeDeliveryAbove: 1000
+  };
+
+  const siteSettings = {
+    businessName: 'Sweet Dreams Cakes',
+    email: 'hello@sweetdreamscakes.com',
+    phone: '+91 98765 43210',
+    address: '123 Baker Street, Mumbai, India',
+    maintenanceMode: false,
+    whatsappNumber: '+91 98765 43210',
+    whatsappEnabled: true
   };
 
   return (
@@ -134,11 +172,15 @@ const AdminDashboard = () => {
 
         {/* Management Tabs */}
         <Tabs defaultValue="orders" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-5">
+          <TabsList className="grid w-full grid-cols-9">
             <TabsTrigger value="orders">Orders</TabsTrigger>
             <TabsTrigger value="cakes">Cakes</TabsTrigger>
             <TabsTrigger value="users">Users</TabsTrigger>
             <TabsTrigger value="reviews">Reviews</TabsTrigger>
+            <TabsTrigger value="coupons">Coupons</TabsTrigger>
+            <TabsTrigger value="delivery">Delivery</TabsTrigger>
+            <TabsTrigger value="social">Social</TabsTrigger>
+            <TabsTrigger value="settings">Settings</TabsTrigger>
             <TabsTrigger value="analytics">Analytics</TabsTrigger>
           </TabsList>
 
@@ -365,6 +407,289 @@ const AdminDashboard = () => {
                   </CardContent>
                 </Card>
               ))}
+            </div>
+          </TabsContent>
+
+          {/* Coupons & Offers */}
+          <TabsContent value="coupons" className="space-y-6">
+            <div className="flex justify-between items-center">
+              <h2 className="text-display text-2xl font-semibold">Coupons & Offers</h2>
+              <Button className="btn-hero">
+                <Plus className="h-4 w-4 mr-2" />
+                Create Coupon
+              </Button>
+            </div>
+
+            <Card className="card-elegant">
+              <CardContent className="p-0">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Code</TableHead>
+                      <TableHead>Discount</TableHead>
+                      <TableHead>Min Order</TableHead>
+                      <TableHead>Expiry</TableHead>
+                      <TableHead>Status</TableHead>
+                      <TableHead>Used</TableHead>
+                      <TableHead>Actions</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {dummyCoupons.map((coupon) => (
+                      <TableRow key={coupon.id}>
+                        <TableCell className="font-medium">{coupon.code}</TableCell>
+                        <TableCell>
+                          {coupon.type === 'percentage' ? `${coupon.discount}%` : `₹${coupon.discount}`}
+                        </TableCell>
+                        <TableCell>₹{coupon.minOrder}</TableCell>
+                        <TableCell>{coupon.expiry}</TableCell>
+                        <TableCell>
+                          <Badge className={coupon.active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}>
+                            {coupon.active ? 'Active' : 'Inactive'}
+                          </Badge>
+                        </TableCell>
+                        <TableCell>{coupon.used} times</TableCell>
+                        <TableCell>
+                          <div className="flex space-x-2">
+                            <Button variant="outline" size="sm">Edit</Button>
+                            <Button variant="outline" size="sm">
+                              {coupon.active ? 'Disable' : 'Enable'}
+                            </Button>
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          {/* Delivery Settings */}
+          <TabsContent value="delivery" className="space-y-6">
+            <h2 className="text-display text-2xl font-semibold">Delivery Settings</h2>
+            
+            <div className="grid gap-6">
+              <Card className="card-elegant">
+                <CardHeader>
+                  <CardTitle className="flex items-center">
+                    <Clock className="h-5 w-5 mr-2" />
+                    Delivery Hours
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div>
+                    <label className="text-sm font-medium">Operating Hours</label>
+                    <Input value={deliverySettings.hours} className="mt-1" />
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="card-elegant">
+                <CardHeader>
+                  <CardTitle className="flex items-center">
+                    <MapPin className="h-5 w-5 mr-2" />
+                    Service Areas
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex flex-wrap gap-2">
+                    {deliverySettings.areas.map((area, index) => (
+                      <Badge key={index} variant="outline" className="px-3 py-1">
+                        {area}
+                        <button className="ml-2 text-red-500">×</button>
+                      </Badge>
+                    ))}
+                  </div>
+                  <Input placeholder="Add new area" />
+                </CardContent>
+              </Card>
+
+              <Card className="card-elegant">
+                <CardHeader>
+                  <CardTitle className="flex items-center">
+                    <DollarSign className="h-5 w-5 mr-2" />
+                    Delivery Charges
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-sm font-medium">Standard Delivery</label>
+                      <Input value={`₹${deliverySettings.charges}`} className="mt-1" />
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium">Free Delivery Above</label>
+                      <Input value={`₹${deliverySettings.freeDeliveryAbove}`} className="mt-1" />
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </TabsContent>
+
+          {/* Social Media Management */}
+          <TabsContent value="social" className="space-y-6">
+            <h2 className="text-display text-2xl font-semibold">Social Media Management</h2>
+            
+            <div className="grid gap-6">
+              <Card className="card-elegant">
+                <CardHeader>
+                  <CardTitle className="flex items-center">
+                    <Instagram className="h-5 w-5 mr-2" />
+                    Instagram Integration
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="font-medium">Auto-fetch Reels</p>
+                      <p className="text-sm text-muted-foreground">Automatically display latest Instagram reels</p>
+                    </div>
+                    <Switch defaultChecked />
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium">Instagram Handle</label>
+                    <Input placeholder="@sweetdreams_cakes" className="mt-1" />
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium">Hashtag Filter</label>
+                    <Input placeholder="#sweetdreamscakes" className="mt-1" />
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="card-elegant">
+                <CardHeader>
+                  <CardTitle className="flex items-center">
+                    <Twitter className="h-5 w-5 mr-2" />
+                    Twitter Integration
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="font-medium">Auto-fetch Tweets</p>
+                      <p className="text-sm text-muted-foreground">Display latest tweets and updates</p>
+                    </div>
+                    <Switch defaultChecked />
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium">Twitter Handle</label>
+                    <Input placeholder="@sweetdreamscakes" className="mt-1" />
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="card-elegant">
+                <CardHeader>
+                  <CardTitle>Social Feed Preview</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-3 gap-4">
+                    {[1, 2, 3].map((i) => (
+                      <div key={i} className="aspect-square bg-muted rounded-lg flex items-center justify-center">
+                        <Instagram className="h-8 w-8 text-muted-foreground" />
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </TabsContent>
+
+          {/* Site Settings */}
+          <TabsContent value="settings" className="space-y-6">
+            <h2 className="text-display text-2xl font-semibold">Site Settings</h2>
+            
+            <div className="grid gap-6">
+              <Card className="card-elegant">
+                <CardHeader>
+                  <CardTitle className="flex items-center">
+                    <Globe className="h-5 w-5 mr-2" />
+                    Business Information
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-sm font-medium">Business Name</label>
+                      <Input value={siteSettings.businessName} className="mt-1" />
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium">Contact Email</label>
+                      <Input value={siteSettings.email} className="mt-1" />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-sm font-medium">Phone Number</label>
+                      <Input value={siteSettings.phone} className="mt-1" />
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium">WhatsApp Number</label>
+                      <Input value={siteSettings.whatsappNumber} className="mt-1" />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium">Address</label>
+                    <Textarea value={siteSettings.address} className="mt-1" />
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="card-elegant">
+                <CardHeader>
+                  <CardTitle className="flex items-center">
+                    <Phone className="h-5 w-5 mr-2" />
+                    WhatsApp Settings
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="font-medium">Enable WhatsApp Button</p>
+                      <p className="text-sm text-muted-foreground">Show floating WhatsApp button on website</p>
+                    </div>
+                    <Switch defaultChecked={siteSettings.whatsappEnabled} />
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium">Default Message</label>
+                    <Textarea 
+                      placeholder="Hi! I'm interested in ordering a cake..."
+                      className="mt-1"
+                    />
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="card-elegant">
+                <CardHeader>
+                  <CardTitle className="flex items-center">
+                    <Shield className="h-5 w-5 mr-2" />
+                    System Controls
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="font-medium">Maintenance Mode</p>
+                      <p className="text-sm text-muted-foreground">Temporarily disable public access</p>
+                    </div>
+                    <Switch defaultChecked={siteSettings.maintenanceMode} />
+                  </div>
+                  <div className="flex space-x-2">
+                    <Button variant="outline">
+                      <Database className="h-4 w-4 mr-2" />
+                      Backup Data
+                    </Button>
+                    <Button variant="outline">
+                      <Activity className="h-4 w-4 mr-2" />
+                      View Activity Logs
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
           </TabsContent>
 

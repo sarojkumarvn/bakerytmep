@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Star, Clock, Shield, Heart, Instagram, Twitter } from 'lucide-react';
+import { ArrowRight, Star, Clock, Shield, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import Header from '@/components/Header';
 import CakeCard from '@/components/CakeCard';
+import InstagramReels from '@/components/InstagramReels';
+import TwitterPosts from '@/components/TwitterPosts';
 import { dummyCakes, dummyReviews } from '@/data/dummy';
 import heroImage from '@/assets/hero-cake.jpg';
 
@@ -128,6 +130,9 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Instagram Reels Section */}
+      <InstagramReels />
+
       {/* Reviews */}
       <section className="py-20 bg-muted/30">
         <div className="container mx-auto px-4">
@@ -165,31 +170,8 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Social Feed */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="text-center space-y-4 mb-12">
-            <Badge variant="outline" className="mb-4">Follow Us</Badge>
-            <h2 className="text-display text-4xl font-bold text-primary">
-              @sweetdreams_cakes
-            </h2>
-            <p className="text-subtitle">
-              See our latest creations and happy customers
-            </p>
-          </div>
-          
-          <div className="flex justify-center space-x-6">
-            <Button variant="outline" size="lg" className="btn-elegant">
-              <Instagram className="mr-2 h-5 w-5" />
-              Instagram
-            </Button>
-            <Button variant="outline" size="lg" className="btn-elegant">
-              <Twitter className="mr-2 h-5 w-5" />
-              Twitter
-            </Button>
-          </div>
-        </div>
-      </section>
+      {/* Twitter Posts Section */}
+      <TwitterPosts />
 
       {/* WhatsApp Floating Button */}
       <div className="fixed bottom-6 right-6 z-50">
