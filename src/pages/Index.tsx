@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ArrowRight, CakeIcon, Clock, Heart, Shield, Star } from 'lucide-react';
+import MyFooter from '@/components/footer';
 
 const Index = () => {
   const [selectedCake, setSelectedCake] = useState(null);
@@ -216,6 +217,11 @@ const Index = () => {
         onOpenChange={setIsProductDialogOpen}
         cake={selectedCake}
       />
+      <section className=" bg-gray-50">
+        
+        <MyFooter />
+        
+      </section>
     </div>
   );
 };

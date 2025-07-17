@@ -80,7 +80,7 @@ export const ProductDialog = ({ open, onOpenChange, cake }: ProductDialogProps) 
             <div className="relative">
               {/* Main Carousel */}
               <Carousel
-                setApi={setApi}
+                // setApi={setApi}
                 className="relative w-full rounded-lg overflow-hidden mb-4"
                 opts={{ loop: true }}
               >
