@@ -1,6 +1,5 @@
-
-import { useState } from 'react';
-import { Star, Heart, Minus, Plus, ShoppingCart, MessageSquare } from 'lucide-react';
+import { useCallback, useEffect, useState } from 'react';
+import { Star, Heart, Minus, Plus, ShoppingCart } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -9,26 +8,13 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 import { useToast } from '@/hooks/use-toast';
-
-interface Cake {
-  id: number;
-  name: string;
-  price: number;
-  originalPrice?: number;
-  image: string;
-  category: string;
-  rating: number;
-  reviews: number;
-  description: string;
-  isFeatured: boolean;
-  isBestseller: boolean;
-  tags: string[];
-}
+import { Cake } from '@/data/dummy';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from './ui/carousel';
+import type { EmblaCarouselType } from 'embla-carousel';
 
 interface ProductDialogProps {
   open: boolean;
@@ -40,28 +26,50 @@ export const ProductDialog = ({ open, onOpenChange, cake }: ProductDialogProps) 
   const [quantity, setQuantity] = useState(1);
   const [customMessage, setCustomMessage] = useState('');
   const [selectedWeight, setSelectedWeight] = useState('1kg');
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const [api, setApi] = useState<EmblaCarouselType | null>(null);
   const { toast } = useToast();
-
-  if (!cake) return null;
 
   const weights = ['500g', '1kg', '1.5kg', '2kg'];
 
-  const handleAddToCart = () => {
+  // Auto slide effect
+  useEffect(() => {
+    if (!api || !open) return;
+
+    const intervalId = setInterval(() => {
+      if (api.canScrollNext()) {
+        api.scrollNext();
+      } else {
+        api.scrollTo(0);
+      }
+    }, 3000);
+
+    return () => clearInterval(intervalId);
+  }, [api, open]);
+
+  const onSelectImage = useCallback((index: number) => {
+    setSelectedImageIndex(index);
+    api?.scrollTo(index);
+  }, [api]);
+
+  const handleAddToCart = useCallback(() => {
     toast({
       title: "Added to cart!",
-      description: `${cake.name} has been added to your cart.`,
+      description: `${cake?.name} has been added to your cart.`,
     });
     onOpenChange(false);
-  };
+  }, [cake?.name, onOpenChange, toast]);
 
-  const handleBuyNow = () => {
+  const handleBuyNow = useCallback(() => {
     toast({
       title: "Redirecting to checkout",
       description: "Taking you to the checkout page...",
     });
     onOpenChange(false);
     window.location.href = '/checkout';
-  };
+  }, [onOpenChange, toast]);
+
+  if (!cake) return null;
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -70,17 +78,36 @@ export const ProductDialog = ({ open, onOpenChange, cake }: ProductDialogProps) 
           {/* Image Section */}
           <div className="space-y-4">
             <div className="relative">
-              <img
-                src={cake.image}
-                alt={cake.name}
-                className="w-full h-80 object-cover rounded-lg"
-              />
-              {cake.isBestseller && (
+              {/* Main Carousel */}
+              <Carousel
+                setApi={setApi}
+                className="relative w-full rounded-lg overflow-hidden mb-4"
+                opts={{ loop: true }}
+              >
+                <CarouselContent>
+                  {cake.images.map((image, index) => (
+                    <CarouselItem key={index}>
+                      <div className="relative aspect-square">
+                        <img
+                          src={image}
+                          alt={`${cake.name} ${index + 1}`}
+                          className="w-full h-80 object-cover rounded-lg"
+                          loading="lazy"
+                        />
+                      </div>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <CarouselPrevious className="absolute left-3 top-1/2 -translate-y-1/2" />
+                <CarouselNext className="absolute right-3 top-1/2 -translate-y-1/2" />
+              </Carousel>
+
+              {cake.bestseller && (
                 <Badge className="absolute top-3 left-3 bg-orange-500">
                   Bestseller
                 </Badge>
               )}
-              {cake.isFeatured && (
+              {cake.featured && (
                 <Badge className="absolute top-3 right-3 bg-purple-500">
                   Featured
                 </Badge>
@@ -100,11 +127,10 @@ export const ProductDialog = ({ open, onOpenChange, cake }: ProductDialogProps) 
                 {[...Array(5)].map((_, i) => (
                   <Star
                     key={i}
-                    className={`h-4 w-4 ${
-                      i < Math.floor(cake.rating)
+                    className={`h-4 w-4 ${i < Math.floor(cake.rating)
                         ? 'fill-yellow-400 text-yellow-400'
                         : 'text-gray-300'
-                    }`}
+                      }`}
                   />
                 ))}
               </div>
@@ -118,9 +144,9 @@ export const ProductDialog = ({ open, onOpenChange, cake }: ProductDialogProps) 
               <span className="text-3xl font-bold text-primary">
                 ₹{cake.price}
               </span>
-              {cake.originalPrice && (
+              {cake.price && (
                 <span className="text-lg text-muted-foreground line-through">
-                  ₹{cake.originalPrice}
+                  ₹{cake.price + 100}
                 </span>
               )}
             </div>

@@ -5,7 +5,7 @@ export interface Cake {
   name: string;
   description: string;
   price: number;
-  category: string;
+  category: categoriesEnum;
   tags: string[];
   images: string[];
   featured: boolean;
@@ -80,6 +80,40 @@ export interface Coupon {
   description: string;
 }
 
+enum categoriesEnum {
+  'Birthday',
+  'Wedding',
+  'Anniversary',
+  'Special Occasion'
+}
+
+export const categories = [
+  {
+    name:  categoriesEnum.Birthday,
+    description: 'Celebrate special moments with our birthday collection',
+    image: 'https://images.pexels.com/photos/7100318/pexels-photo-7100318.jpeg'
+  },{
+    name: categoriesEnum.Wedding,
+    description: 'Create unforgettable memories with our wedding cakes',
+    image: 'https://images.pexels.com/photos/2038258/pexels-photo-2038258.jpeg'
+  },{
+    name: categoriesEnum.Anniversary,
+    description: 'Celebrate love and friendship with our anniversary cakes',
+    image: 'https://images.pexels.com/photos/2144200/pexels-photo-2144200.jpeg'
+  },{
+    name: categoriesEnum["Special Occasion"],
+    description: 'Celebrate special occasions with our special occasion cakes',
+    image: 'https://images.pexels.com/photos/33002841/pexels-photo-33002841.jpeg'
+  }
+]
+
+// https://images.pexels.com/photos/1027811/pexels-photo-1027811.jpeg
+// https://images.pexels.com/photos/1169790/pexels-photo-1169790.jpeg
+// https://images.pexels.com/photos/31336126/pexels-photo-31336126.jpeg
+// https://images.pexels.com/photos/17486826/pexels-photo-17486826.jpeg
+// https://images.pexels.com/photos/15147745/pexels-photo-15147745.jpeg
+// https://images.pexels.com/photos/20030868/pexels-photo-20030868.jpeg
+// https://images.pexels.com/photos/818789/pexels-photo-818789.jpeg
 // Sample data
 export const dummyCakes: Cake[] = [
   {
@@ -87,9 +121,9 @@ export const dummyCakes: Cake[] = [
     name: 'Chocolate Drip Cake',
     description: 'Indulgent chocolate cake with rich ganache drip and fresh berries',
     price: 2499,
-    category: 'Birthday',
+    category: categoriesEnum.Birthday,
     tags: ['Chocolate', 'Premium', 'Bestseller'],
-    images: ['/lovable-uploads/fea30296-9e18-4176-abc8-3c7dcb9996f8.png'],
+    images: ['https://images.pexels.com/photos/291528/pexels-photo-291528.jpeg',"https://images.pexels.com/photos/291528/pexels-photo-291528.jpeg"],
     featured: true,
     bestseller: true,
     inStock: true,
@@ -102,9 +136,9 @@ export const dummyCakes: Cake[] = [
     name: 'Red Velvet Supreme',
     description: 'Classic red velvet with cream cheese frosting and elegant decoration',
     price: 1899,
-    category: 'Birthday',
+    category: categoriesEnum.Birthday,
     tags: ['Red Velvet', 'Classic', 'Eggless'],
-    images: ['/placeholder.svg'],
+    images: ['https://images.pexels.com/photos/19940993/pexels-photo-19940993.png'],
     featured: true,
     bestseller: false,
     inStock: true,
@@ -117,9 +151,9 @@ export const dummyCakes: Cake[] = [
     name: 'Wedding Elegance',
     description: 'Three-tier wedding cake with white fondant and rose decorations',
     price: 8999,
-    category: 'Wedding',
+    category: categoriesEnum.Wedding,
     tags: ['Wedding', 'Multi-tier', 'Fondant'],
-    images: ['/placeholder.svg'],
+    images: ['https://images.pexels.com/photos/9501651/pexels-photo-9501651.jpeg'],
     featured: false,
     bestseller: false,
     inStock: true,
@@ -132,9 +166,9 @@ export const dummyCakes: Cake[] = [
     name: 'Vanilla Bean Delight',
     description: 'Light vanilla sponge with fresh cream and seasonal fruits',
     price: 1599,
-    category: 'Birthday',
+    category: categoriesEnum.Birthday,
     tags: ['Vanilla', 'Fresh Fruits', 'Light'],
-    images: ['/placeholder.svg'],
+    images: ['https://images.pexels.com/photos/697571/pexels-photo-697571.jpeg'],
     featured: false,
     bestseller: true,
     inStock: true,
@@ -147,15 +181,156 @@ export const dummyCakes: Cake[] = [
     name: 'Custom Designer Cake',
     description: 'Personalized cake with your choice of design and flavors',
     price: 3999,
-    category: 'Custom',
+    category: categoriesEnum["Special Occasion"],
     tags: ['Custom', 'Designer', 'Premium'],
-    images: ['/placeholder.svg'],
+    images: ['https://images.pexels.com/photos/1027811/pexels-photo-1027811.jpeg'],
     featured: true,
     bestseller: false,
     inStock: true,
     deliveryTime: '48 hours',
     rating: 4.9,
     reviews: 73
+  },{
+    id: '6',
+    name: 'Red Velvet Supreme',
+    description: 'Classic red velvet with cream cheese frosting and elegant decoration',
+    price: 1899,
+    category: categoriesEnum.Birthday,
+    tags: ['Red Velvet', 'Classic', 'Eggless'],
+    images: ['https://images.pexels.com/photos/19940993/pexels-photo-19940993.png'],
+    featured: true,
+    bestseller: false,
+    inStock: true,
+    deliveryTime: '1-2 hours',
+    rating: 4.6,
+    reviews: 89
+  },
+  {
+    id: '7',
+    name: 'Wedding Elegance',
+    description: 'Three-tier wedding cake with white fondant and rose decorations',
+    price: 8999,
+    category: categoriesEnum.Wedding,
+    tags: ['Wedding', 'Multi-tier', 'Fondant'],
+    images: ['https://images.pexels.com/photos/9501651/pexels-photo-9501651.jpeg'],
+    featured: false,
+    bestseller: false,
+    inStock: true,
+    deliveryTime: '24 hours',
+    rating: 4.9,
+    reviews: 45
+  },{
+    id: '8',
+    name: 'Vanilla Bean Delight',
+    description: 'Light vanilla sponge with fresh cream and seasonal fruits',
+    price: 1599,
+    category: categoriesEnum.Birthday,
+    tags: ['Vanilla', 'Fresh Fruits', 'Light'],
+    images: ['https://images.pexels.com/photos/697571/pexels-photo-697571.jpeg'],
+    featured: false,
+    bestseller: true,
+    inStock: true,
+    deliveryTime: '1-2 hours',
+    rating: 4.5,
+    reviews: 156
+  },{
+    id: '9',
+    name: 'Custom Designer Cake',
+    description: 'Personalized cake with your choice of design and flavors',
+    price: 3999,
+    category: categoriesEnum["Special Occasion"],
+    tags: ['Custom', 'Designer', 'Premium'],
+    images: ['https://images.pexels.com/photos/1027811/pexels-photo-1027811.jpeg'],
+    featured: true,
+    bestseller: false,
+    inStock: true,
+    deliveryTime: '48 hours',
+    rating: 4.9,
+    reviews: 73
+  },{
+    id: '10',
+    name: 'Red Velvet Supreme',
+    description: 'Classic red velvet with cream cheese frosting and elegant decoration',
+    price: 1899,
+    category: categoriesEnum.Birthday,
+    tags: ['Red Velvet', 'Classic', 'Eggless'],
+    images: ['https://images.pexels.com/photos/19940993/pexels-photo-19940993.png'],
+    featured: true,
+    bestseller: false,
+    inStock: true,
+    deliveryTime: '1-2 hours',
+    rating: 4.6,
+    reviews: 89
+  },{
+    id: '11',
+    name: 'Wedding Elegance',
+    description: 'Three-tier wedding cake with white fondant and rose decorations',
+    price: 8999,
+    category: categoriesEnum.Wedding,
+    tags: ['Wedding', 'Multi-tier', 'Fondant'],
+    images: ['https://images.pexels.com/photos/9501651/pexels-photo-9501651.jpeg'],
+    featured: false,
+    bestseller: false,
+    inStock: true,
+    deliveryTime: '24 hours',
+    rating: 4.9,
+    reviews: 45
+  },{
+    id: '12',
+    name: 'Vanilla Bean Delight',
+    description: 'Light vanilla sponge with fresh cream and seasonal fruits',
+    price: 1599,
+    category: categoriesEnum.Birthday,
+    tags: ['Vanilla', 'Fresh Fruits', 'Light'],
+    images: ['https://images.pexels.com/photos/15147745/pexels-photo-15147745.jpeg'],
+    featured: false,
+    bestseller: true,
+    inStock: true,
+    deliveryTime: '1-2 hours',
+    rating: 4.5,
+    reviews: 156
+  },{
+    id: '13',
+    name: 'Custom Designer Cake',
+    description: 'Personalized cake with your choice of design and flavors',
+    price: 3999,
+    category: categoriesEnum["Special Occasion"],
+    tags: ['Custom', 'Designer', 'Premium'],
+    images: ['https://images.pexels.com/photos/17486826/pexels-photo-17486826.jpeg'],
+    featured: true,
+    bestseller: false,
+    inStock: true,
+    deliveryTime: '48 hours',
+    rating: 4.9,
+    reviews: 73
+  },{
+    id: '14',
+    name: 'Red Velvet Supreme',
+    description: 'Classic red velvet with cream cheese frosting and elegant decoration',
+    price: 1899,
+    category: categoriesEnum.Birthday,
+    tags: ['Red Velvet', 'Classic', 'Eggless'],
+    images: ['https://images.pexels.com/photos/20030868/pexels-photo-20030868.jpeg'],
+    featured: true,
+    bestseller: false,
+    inStock: true,
+    deliveryTime: '1-2 hours',
+    rating: 4.6,
+    reviews: 89
+  },{
+    id: '15',
+    name: 'Wedding Elegance',
+    description: 'Three-tier wedding cake with white fondant and rose decorations',
+    price: 8999,
+    category: categoriesEnum.Wedding,
+    tags: ['Wedding', 'Multi-tier', 'Fondant'],
+    images: ['https://images.pexels.com/photos/818789/pexels-photo-818789.jpeg'],
+    featured: false,
+    bestseller: false,
+    inStock: true,
+    deliveryTime: '24 hours',
+    rating: 4.9,
+    reviews: 45
   }
 ];
 
